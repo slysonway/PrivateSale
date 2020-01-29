@@ -1,0 +1,2 @@
+include ':app', ':barcode-reader'
+rootProject.name='PrivateSale'

@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">PrivateSale</string>
+
+    //menu
+    <string name="action_info">Info</string>
+    <string name="action_list">List</string>
+    <string name="action_flash">Flash</string>
+
+    //title
+    <string name="event_title">Events</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

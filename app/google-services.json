@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "658421032398",
+    "firebase_url": "https://privatesale-623c9.firebaseio.com",
+    "project_id": "privatesale-623c9",
+    "storage_bucket": "privatesale-623c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658421032398:android:ab4393f563ac7f8807379f",
+        "android_client_info": {
+          "package_name": "com.kfp.privatesale"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658421032398-9jobhlg88j5qo4l2tak6ogvj24nkf27v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kfp.privatesale",
+            "certificate_hash": "7c941d8dd78d57845ed299cb11ace3eea12632df"
+          }
+        },
+        {
+          "client_id": "658421032398-p5uai62jhdk0cuaasv5p5m39q3d4h3ua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCrHeFzOZeoPPDESgqnRbbAtX06MzlKleY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658421032398-p5uai62jhdk0cuaasv5p5m39q3d4h3ua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
