@@ -17,8 +17,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.service.model.Customer;
-import com.kfp.privatesale.service.model.Event;
-import com.kfp.privatesale.view.ui.CustomerListFragment;
+import com.kfp.privatesale.view.ui.fragment.CustomerListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +38,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_customer, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_customer_title, parent, false);
         return  new ViewHolder(view);
     }
 

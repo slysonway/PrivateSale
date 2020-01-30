@@ -1,4 +1,4 @@
-package com.kfp.privatesale.view.ui;
+package com.kfp.privatesale.view.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,6 +33,7 @@ public class EventListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(getString(R.string.event_title));
+
     }
 
     @Override
@@ -44,7 +46,7 @@ public class EventListFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
             FirebaseFirestore db = FirebaseFirestore.getInstance();
-            Query query = db.collection("events").orderBy("name");
+            Query query = db.collection("events");
             adapter = new EventAdapter(query, mListener);
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
             recyclerView.addItemDecoration(dividerItemDecoration);

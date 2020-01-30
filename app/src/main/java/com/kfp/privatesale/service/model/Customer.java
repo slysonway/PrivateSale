@@ -1,6 +1,9 @@
 package com.kfp.privatesale.service.model;
 
+import com.google.firebase.firestore.DocumentId;
+
 public class Customer {
+    @DocumentId
     private String id;
     private String firstname;
     private String lastname;

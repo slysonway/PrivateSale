@@ -1,16 +1,20 @@
-package com.kfp.privatesale.view.ui;
+package com.kfp.privatesale.view.ui.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.service.model.Customer;
 import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.view.ui.fragment.CustomerListFragment;
+import com.kfp.privatesale.view.ui.fragment.EventListFragment;
 
 public class ListActivity extends AppCompatActivity implements EventListFragment.OnListFragmentInteractionListerner, CustomerListFragment.OnFragmentInteractionListener{
 
@@ -18,7 +22,7 @@ public class ListActivity extends AppCompatActivity implements EventListFragment
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         launchFragment(new EventListFragment(), false).commit();
     }
 
@@ -41,6 +45,14 @@ public class ListActivity extends AppCompatActivity implements EventListFragment
             ft.addToBackStack(null);
         }
         return ft;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return true;
     }
 
 

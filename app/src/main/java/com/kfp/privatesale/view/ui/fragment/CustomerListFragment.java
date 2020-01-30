@@ -1,4 +1,4 @@
-package com.kfp.privatesale.view.ui;
+package com.kfp.privatesale.view.ui.fragment;
 
 import android.content.Context;
 import android.os.Bundle;

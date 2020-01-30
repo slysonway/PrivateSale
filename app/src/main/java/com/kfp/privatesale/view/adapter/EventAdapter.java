@@ -17,7 +17,7 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.service.model.Event;
-import com.kfp.privatesale.view.ui.EventListFragment;
+import com.kfp.privatesale.view.ui.fragment.EventListFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +61,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mEvent = mValues.get(position);
         holder.mNameView.setText(mValues.get(position).getName());
-        holder.mDateView.setText(mValues.get(position).getDate());
+        holder.mDateView.setText(mValues.get(position).getDate().toDate().toString());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override

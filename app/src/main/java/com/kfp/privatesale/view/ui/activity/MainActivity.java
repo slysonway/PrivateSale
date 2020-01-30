@@ -1,9 +1,13 @@
-package com.kfp.privatesale.view.ui;
+package com.kfp.privatesale.view.ui.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -26,6 +30,11 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         setContentView(R.layout.activity_main);
 
         bottomNavigationView = findViewById(R.id.bottom_menu);
+
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+                == PackageManager.PERMISSION_DENIED) {
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 2);
+        }
 
         ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(this);

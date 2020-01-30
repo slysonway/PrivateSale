@@ -1,10 +1,15 @@
 package com.kfp.privatesale.service.model;
 
 import androidx.annotation.NonNull;
+
+import com.google.firebase.Timestamp;
+import com.google.firebase.firestore.DocumentId;
+
 public class Event {
+    @DocumentId
     private String id;
     private String Name;
-    private String date;
+    private Timestamp date;
 
     public String getId() {
         return id;
@@ -24,11 +29,11 @@ public class Event {
     }
 
     @NonNull
-    public String getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(@NonNull String date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 }

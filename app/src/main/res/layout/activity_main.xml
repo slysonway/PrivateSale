@@ -38,13 +38,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/private_sale" />
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:labelVisibilityMode="unlabeled"
         android:layout_gravity="bottom"
-        android:background="@android:color/white"
+        android:background="@color/colorPrimary"
         app:itemIconTint="@android:color/black"
         app:menu="@menu/menu_main" />
 </FrameLayout>

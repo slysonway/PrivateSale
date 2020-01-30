@@ -1,4 +1,4 @@
-package com.kfp.privatesale.view.ui;
+package com.kfp.privatesale.view.ui.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -23,6 +23,7 @@ public class LaunchActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } finally {
                     startActivity(new Intent(LaunchActivity.this, MainActivity.class));
+                    finish();
                 }
             }
         };
