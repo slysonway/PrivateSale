@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -33,7 +32,6 @@ public class EventListFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getActivity().setTitle(getString(R.string.event_title));
-
     }
 
     @Override
@@ -85,6 +83,6 @@ public class EventListFragment extends Fragment {
     }
 
     public interface  OnListFragmentInteractionListerner{
-        void onListFragmentInteraction(Event event);
+        void onEventListFragmentInteraction(Event event);
     }
 }

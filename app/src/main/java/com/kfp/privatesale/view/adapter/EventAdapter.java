@@ -67,7 +67,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onListFragmentInteraction(holder.mEvent);
+                    mListener.onEventListFragmentInteraction(holder.mEvent);
                 }
             }
         });

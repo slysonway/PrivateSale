@@ -6,10 +6,12 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.kfp.privatesale.ConstantField;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.service.model.Customer;
 import com.kfp.privatesale.service.model.Event;
@@ -27,14 +29,17 @@ public class ListActivity extends AppCompatActivity implements EventListFragment
     }
 
     @Override
-    public void onListFragmentInteraction(Event event) {
+    public void onEventListFragmentInteraction(Event event) {
         Toast.makeText(this, event.toString(), Toast.LENGTH_SHORT).show();
         launchFragment(new CustomerListFragment(event.getId()), true).commit();
     }
 
     @Override
-    public void onFragmentInteraction(Customer customer) {
+    public void onFragmentCustomerListInteraction(Customer customer) {
         Toast.makeText(this, customer.toString(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(ListActivity.this, CustomerActivity.class);
+        intent.putExtra(ConstantField.SCANNED_CODE, customer.getId());
+        startActivity(intent);
     }
 
     private FragmentTransaction launchFragment(Fragment fragment, Boolean isBackStack) {

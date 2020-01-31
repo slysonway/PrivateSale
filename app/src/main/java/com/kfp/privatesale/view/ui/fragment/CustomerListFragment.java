@@ -87,6 +87,6 @@ public class CustomerListFragment extends Fragment {
 
 
     public interface OnFragmentInteractionListener {
-        void onFragmentInteraction(Customer customer);
+        void onFragmentCustomerListInteraction(Customer customer);
     }
 }

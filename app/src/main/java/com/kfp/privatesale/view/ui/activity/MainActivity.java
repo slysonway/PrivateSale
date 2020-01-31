@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
+import com.kfp.privatesale.ConstantField;
 import com.kfp.privatesale.R;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
@@ -79,7 +80,10 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
 
     @Override
     public void handleResult(Result rawResult) {
-        Toast.makeText(this, "Contents = " + rawResult.getText() + ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Contents = " + rawResult.getText() + ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(MainActivity.this, CustomerActivity.class);
+        intent.putExtra(ConstantField.SCANNED_CODE, rawResult.getText());
+        startActivity(intent);
 
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {

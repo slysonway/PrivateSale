@@ -68,7 +68,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    mListener.onFragmentInteraction(holder.mCustomer);
+                    mListener.onFragmentCustomerListInteraction(holder.mCustomer);
                 }
             }
         });
