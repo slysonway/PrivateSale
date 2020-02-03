@@ -5,10 +5,15 @@
     <string name="action_info">Info</string>
     <string name="action_list">List</string>
     <string name="action_flash">Flash</string>
+    <string name="action_search">Search</string>
 
     //title
     <string name="event_title">Events</string>
+    <string name="about_title">A propos</string>
 
+    <string name="about_contact">support@test.com</string>
+<!--    <string name="about_version">%s V%1$s</string>-->
+    <string name="about_version">PrivateSale V%s</string>
 
     //
     <string name="unauthorized">Non Inscrit</string>

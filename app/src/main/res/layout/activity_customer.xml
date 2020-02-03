@@ -11,6 +11,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@android:color/holo_red_dark"
+        android:backgroundTint="@android:color/holo_green_dark"
         android:padding="2dp"
         android:text="@string/authorized"
         android:textAlignment="center"

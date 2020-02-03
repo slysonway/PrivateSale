@@ -50,7 +50,8 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.action_info:
-                        Toast.makeText(MainActivity.this, "info", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "info", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(MainActivity.this, AboutActivity.class));
                         break;
                     case R.id.action_list:
                         //Toast.makeText(MainActivity.this, "list", Toast.LENGTH_SHORT).show();

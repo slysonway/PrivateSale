@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,8 @@ public class CustomerActivity extends AppCompatActivity {
     private TextView name;
     private TextView firstname;
     private TextView email;
+    private TextView status;
+    private TextView infoTag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class CustomerActivity extends AppCompatActivity {
         name = findViewById(R.id.customer_info_name);
         firstname = findViewById(R.id.customer_info_firstname);
         email = findViewById(R.id.customer_info_email);
+        status = findViewById(R.id.customer_info_status);
+        infoTag = findViewById(R.id.customer_info_tag_unauthorized);
     }
 
     @Override
@@ -68,6 +73,8 @@ public class CustomerActivity extends AppCompatActivity {
                     name.setText(customer.getLastname());
                     firstname.setText(customer.getFirstname());
                     email.setText(customer.getMail());
+                    status.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+                    infoTag.setVisibility(View.GONE);
                 } else {
                     Log.d(TAG, "Current data: null");
                 }
