@@ -49,36 +49,36 @@ public class AboutActivity extends AppCompatActivity {
         preferences = new Preferences(this);
         versionText = findViewById(R.id.about_version);
         spinner = findViewById(R.id.about_spinner);
-        final ArrayAdapter<Event> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, eventList);
+        initSpinnerData();
+
+    }
+
+    private void initSpinnerData() {
+        final ArrayAdapter<Event> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-
-        Log.d(TAG, preferences.getEvent().toString());
-
-
-        //TODO fix display bug and do select in async don't do live data
-        try {
-            String date = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
-            Log.d(TAG, date);
-            eventViewModel.eventByDate(date).observe(this, new Observer<List<Event>>() {
-                @Override
-                public void onChanged(List<Event> events) {
-                    eventList.clear();
-                    for (Event event : events) {
-                        eventList.add(event);
-                    }
-                    spinner.setSelection(eventList.indexOf(preferences.getEvent()));
-                    adapter.notifyDataSetChanged();
+        String date = new SimpleDateFormat("YYYY-MM-dd").format(new Date());
+        eventViewModel.eventByDate(date).observe(this, new Observer<List<Event>>() {
+            @Override
+            public void onChanged(List<Event> events) {
+                for (Event event : events) {
+                    adapter.add(event);
                 }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+                Log.d(TAG, preferences.getEvent().toString());
+                Event event = preferences.getEvent();
+                for (int i = 0; i < adapter.getCount(); i++) {
+                    if (adapter.getItem(i).getId().equals(event.getId())) {
+                        spinner.setSelection(i);
+                        break;
+                    }
+                }
+            }
+        });
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //preferences.setEvent(eventList.get(position));
+                if (adapter.getCount() > 0) {
+                    preferences.setEvent(adapter.getItem(position));
+                }
             }
 
             @Override
@@ -86,7 +86,7 @@ public class AboutActivity extends AppCompatActivity {
 
             }
         });
-        //spinner.setSelection(eventList.indexOf(preferences.getEvent()));
+        spinner.setAdapter(adapter);
     }
 
     @Override
