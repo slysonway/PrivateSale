@@ -25,6 +25,10 @@ public class EventViewModel extends AndroidViewModel {
         return allEvents;
     }
 
+    public LiveData<List<Event>> eventByDate(String date) {
+        return eventRepository.eventByDate(date);
+    }
+
     public void insert(Event event) {
         eventRepository.insert(event);
     }

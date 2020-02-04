@@ -3,7 +3,6 @@ package com.kfp.privatesale.service.model;
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
-
 import com.google.firebase.firestore.DocumentId;
 import com.google.gson.Gson;
 
@@ -45,6 +44,10 @@ public class Event {
         this.date = date;
     }
 
+//    public void setDate(Timestamp date) {
+//        this.date = date.toDate();
+//    }
+
     public String serialize() {
         Gson gson = new Gson();
         return gson.toJson(this);
@@ -52,5 +55,11 @@ public class Event {
 
     static public  Event create(String serialized) {
         return new Gson().fromJson(serialized, Event.class);
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getName() + " - " + getDate();
     }
 }

@@ -55,7 +55,6 @@ public class CustomerActivity extends AppCompatActivity {
         loadCustomer();
     }
 
-    //TODO IMPORTANT
     private void loadCustomer() {
         customerViewModel.customerById(customerId).observe(this, new Observer<Customer>() {
             @Override
@@ -74,6 +73,7 @@ public class CustomerActivity extends AppCompatActivity {
             status.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
             infoTag.setVisibility(View.GONE);
         } else {
+            status.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
             Log.d(TAG, "Current data: null");
         }
     }

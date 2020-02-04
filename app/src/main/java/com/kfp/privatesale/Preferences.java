@@ -20,7 +20,7 @@ public class Preferences {
 
     public final Event getEvent() {
         String key = this.context.getString(R.string.event_preference_key);
-        return Event.create(this.sharedPreferences.getString(key, ""));
+        return Event.create(this.sharedPreferences.getString(key, null));
     }
 
     public final void setEvent(Event event) {

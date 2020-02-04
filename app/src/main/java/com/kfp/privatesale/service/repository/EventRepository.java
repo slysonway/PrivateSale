@@ -33,6 +33,10 @@ public class EventRepository {
         new UpdateAsyncTask(eventDAO).execute(event);
     }
 
+    public LiveData<List<Event>> eventByDate(String date) {
+        return eventDAO.getEventByDate(date);
+    }
+
     public static class InsertAsyncTask extends AsyncTask<Event, Void, Void> {
         private EventDAO eventDAO;
 

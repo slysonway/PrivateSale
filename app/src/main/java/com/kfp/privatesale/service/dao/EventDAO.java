@@ -22,4 +22,7 @@ public interface EventDAO {
     @Update
     void update(Event event);
 
+    @Query("SELECT * FROM event WHERE date > :date ")
+    LiveData<List<Event>> getEventByDate(String date);
+
 }
