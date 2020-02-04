@@ -31,6 +31,7 @@ public class ListActivity extends AppCompatActivity implements EventListFragment
     @Override
     public void onEventListFragmentInteraction(Event event) {
         Toast.makeText(this, event.toString(), Toast.LENGTH_SHORT).show();
+        setTitle(getString(R.string.event_title));
         launchFragment(new CustomerListFragment(event.getId()), true).commit();
     }
 

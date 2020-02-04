@@ -6,15 +6,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.service.model.Customer;
 import com.kfp.privatesale.view.ui.fragment.CustomerListFragment;
@@ -22,17 +15,21 @@ import com.kfp.privatesale.view.ui.fragment.CustomerListFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder> implements EventListener<QuerySnapshot> {
+public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHolder> {
 
-    private final List<Customer> mValues;
+    private List<Customer> mValues;
     private final CustomerListFragment.OnFragmentInteractionListener mListener;
-    private Query query;
-    private ListenerRegistration registration;
+//    private Query query;
+//    private ListenerRegistration registration;
 
-    public CustomerAdapter(Query query, CustomerListFragment.OnFragmentInteractionListener listener) {
+    public CustomerAdapter(CustomerListFragment.OnFragmentInteractionListener listener) {
         mValues = new ArrayList<>();
         mListener = listener;
-        this.query = query;
+    }
+
+    public void setCustomers(List<Customer> customers) {
+        mValues = customers;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -42,20 +39,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         return  new ViewHolder(view);
     }
 
-    public void startQuery() {
-        if (query != null && registration == null) {
-            registration = query.addSnapshotListener(this);
-        }
-    }
 
-    public void stopQuery() {
-        if (registration != null) {
-            registration.remove();
-            registration = null;
-        }
-        mValues.clear();
-        notifyDataSetChanged();
-    }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
@@ -77,36 +61,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     @Override
     public int getItemCount() {
         return mValues.size();
-    }
-
-    @Override
-    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-        if (e != null) {
-            return; //TODO handle better exception
-        }
-
-        for (DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()) {
-            switch (dc.getType()) {
-                case ADDED:
-                    mValues.add(dc.getNewIndex(), dc.getDocument().toObject(Customer.class));
-                    notifyItemInserted(dc.getNewIndex());
-                    break;
-                case REMOVED:
-                    mValues.remove(dc.getOldIndex());
-                    notifyItemRemoved(dc.getOldIndex());
-                    break;
-                case MODIFIED:
-                    if (dc.getOldIndex() == dc.getNewIndex()) {
-                        mValues.set(dc.getNewIndex(), dc.getDocument().toObject(Customer.class));
-                        notifyItemChanged(dc.getNewIndex());
-                    } else {
-                        mValues.remove(dc.getOldIndex());
-                        mValues.add(dc.getNewIndex(), dc.getDocument().toObject(Customer.class));
-                        notifyItemMoved(dc.getOldIndex(), dc.getNewIndex());
-                    }
-                    break;
-            }
-        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

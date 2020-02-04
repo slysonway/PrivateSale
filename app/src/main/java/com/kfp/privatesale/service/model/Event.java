@@ -1,21 +1,29 @@
 package com.kfp.privatesale.service.model;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentId;
+import com.google.gson.Gson;
 
+
+
+@Entity(tableName = "event")
 public class Event {
+    @NonNull
+    @PrimaryKey
     @DocumentId
     private String id;
     private String Name;
-    private Timestamp date;
+    private String date;
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
@@ -29,11 +37,20 @@ public class Event {
     }
 
     @NonNull
-    public Timestamp getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Timestamp date) {
+    public void setDate(String date) {
         this.date = date;
+    }
+
+    public String serialize() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    static public  Event create(String serialized) {
+        return new Gson().fromJson(serialized, Event.class);
     }
 }

@@ -1,19 +1,27 @@
 package com.kfp.privatesale.service.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.firebase.firestore.DocumentId;
 
+@Entity(tableName = "customer")
 public class Customer {
+    @NonNull
+    @PrimaryKey
     @DocumentId
     private String id;
     private String firstname;
     private String lastname;
     private String mail;
 
+    @NonNull
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 

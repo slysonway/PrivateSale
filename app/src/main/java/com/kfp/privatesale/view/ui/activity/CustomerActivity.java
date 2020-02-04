@@ -8,18 +8,15 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.kfp.privatesale.ConstantField;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.service.model.Customer;
+import com.kfp.privatesale.viewmodel.CustomerViewModel;
 
 public class CustomerActivity extends AppCompatActivity {
 
@@ -31,6 +28,7 @@ public class CustomerActivity extends AppCompatActivity {
     private TextView email;
     private TextView status;
     private TextView infoTag;
+    private CustomerViewModel customerViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +46,7 @@ public class CustomerActivity extends AppCompatActivity {
         email = findViewById(R.id.customer_info_email);
         status = findViewById(R.id.customer_info_status);
         infoTag = findViewById(R.id.customer_info_tag_unauthorized);
+        customerViewModel = ViewModelProviders.of(this).get(CustomerViewModel.class);
     }
 
     @Override
@@ -56,30 +55,27 @@ public class CustomerActivity extends AppCompatActivity {
         loadCustomer();
     }
 
+    //TODO IMPORTANT
     private void loadCustomer() {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        final DocumentReference docRef = db.collection("customers").document(customerId);
-        docRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        customerViewModel.customerById(customerId).observe(this, new Observer<Customer>() {
             @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                if (e != null) {
-                    Log.w(TAG, "Listen failed.", e);
-                    return;
-                }
-
-                if (documentSnapshot != null && documentSnapshot.exists()) {
-                    Log.d(TAG, "Current data:" + documentSnapshot.getData());
-                    customer = documentSnapshot.toObject(Customer.class);
-                    name.setText(customer.getLastname());
-                    firstname.setText(customer.getFirstname());
-                    email.setText(customer.getMail());
-                    status.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
-                    infoTag.setVisibility(View.GONE);
-                } else {
-                    Log.d(TAG, "Current data: null");
-                }
+            public void onChanged(Customer customer) {
+                setCustomer(customer);
             }
         });
+    }
+
+    private void setCustomer(Customer customer) {
+        this.customer = customer;
+        if (customer != null) {
+            name.setText(this.customer.getLastname());
+            firstname.setText(this.customer.getFirstname());
+            email.setText(this.customer.getMail());
+            status.setBackgroundColor(getResources().getColor(android.R.color.holo_green_dark));
+            infoTag.setVisibility(View.GONE);
+        } else {
+            Log.d(TAG, "Current data: null");
+        }
     }
 
     @Override

@@ -8,15 +8,7 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.service.model.Event;
 import com.kfp.privatesale.view.ui.fragment.EventListFragment;
@@ -24,19 +16,22 @@ import com.kfp.privatesale.view.ui.fragment.EventListFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> implements EventListener<QuerySnapshot>, Filterable {
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> implements  Filterable {
 
-    private final List<Event> mValues;
+    private List<Event> mValues;
     private List<Event> mValuesFiltered;
     private final EventListFragment.OnListFragmentInteractionListerner mListener;
-    private Query query;
-    private ListenerRegistration registration;
+//    private Query query;
+//    private ListenerRegistration registration;
 
-    public EventAdapter(Query query, EventListFragment.OnListFragmentInteractionListerner listerner) {
-        mValues = new ArrayList<>();
-        mValuesFiltered = new ArrayList<>();
+    public EventAdapter(EventListFragment.OnListFragmentInteractionListerner listerner) {
         mListener = listerner;
-        this.query = query;
+    }
+
+    public void setEvent(List<Event> events) {
+        mValues = events;
+        mValuesFiltered = events;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -46,27 +41,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         return new ViewHolder(view);
     }
 
-    public void startQuery() {
-        if (query != null && registration == null) {
-            registration = query.addSnapshotListener(this);
-        }
-    }
-
-    public void stopQuery() {
-        if (registration != null) {
-            registration.remove();
-            registration = null;
-        }
-        mValues.clear();
-        mValuesFiltered.clear();
-        notifyDataSetChanged();
-    }
-
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mEvent = mValuesFiltered.get(position);
         holder.mNameView.setText(holder.mEvent.getName());
-        holder.mDateView.setText(holder.mEvent.getDate().toDate().toString());
+        holder.mDateView.setText(holder.mEvent.getDate().toString());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,42 +59,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return mValuesFiltered.size();
-    }
-
-    @Override
-    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-        if (e != null) {
-            return; //TODO handle better exception
-        }
-
-        for (DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()) {
-            switch (dc.getType()) {
-                case ADDED:
-                    mValues.add(dc.getNewIndex(), dc.getDocument().toObject(Event.class));
-                    mValuesFiltered.add(dc.getNewIndex(), dc.getDocument().toObject(Event.class));
-                    notifyItemInserted(dc.getNewIndex());
-                    break;
-                case REMOVED:
-                    mValues.remove(dc.getOldIndex());
-                    mValuesFiltered.remove(dc.getOldIndex());
-                    notifyItemRemoved(dc.getOldIndex());
-                    break;
-                case MODIFIED:
-                    if (dc.getOldIndex() == dc.getNewIndex()) {
-                        mValues.set(dc.getNewIndex(), dc.getDocument().toObject(Event.class));
-                        mValuesFiltered.set(dc.getNewIndex(), dc.getDocument().toObject(Event.class));
-                        notifyItemChanged(dc.getNewIndex());
-                    } else {
-                        mValues.remove(dc.getOldIndex());
-                        mValues.add(dc.getNewIndex(), dc.getDocument().toObject(Event.class));
-                        mValuesFiltered.remove(dc.getOldIndex());
-                        mValuesFiltered.add(dc.getNewIndex(), dc.getDocument().toObject(Event.class));
-                        notifyItemMoved(dc.getOldIndex(), dc.getNewIndex());
-                    }
-                    break;
-            }
-        }
+        return mValuesFiltered == null ? 0 : mValuesFiltered.size();
     }
 
     @Override

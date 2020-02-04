@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">PrivateSale</string>
+    
+    //SharedPreferences KEYS
+    <string name="event_preference_key">EVENT_PREFERENCE</string>
 
     //menu
     <string name="action_info">Info</string>
@@ -11,11 +14,15 @@
     <string name="event_title">Events</string>
     <string name="about_title">A propos</string>
 
+    //About
     <string name="about_contact">support@test.com</string>
 <!--    <string name="about_version">%s V%1$s</string>-->
     <string name="about_version">PrivateSale V%s</string>
+    <string name="about_event">Selected Event :</string>
+    <string name="about_event_btn_default">Choose Event...</string>
+    <string name="about_event_btn">%s - %s &#9660;</string>
 
-    //
+
     <string name="unauthorized">Non Inscrit</string>
     <string name="authorized">Inscrit</string>
 
@@ -24,6 +31,7 @@
     <string name="card_firstname">Prénom</string>
     <string name="card_email">Email</string>
     <string name="card_event">Event</string>
+
 
 
     <string name="filer">...</string>
