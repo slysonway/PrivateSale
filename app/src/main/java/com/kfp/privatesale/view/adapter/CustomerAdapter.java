@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kfp.privatesale.R;
-import com.kfp.privatesale.service.model.Customer;
+import com.kfp.privatesale.data.db.entity.Customer;
 import com.kfp.privatesale.view.ui.fragment.CustomerListFragment;
 
 import java.util.ArrayList;

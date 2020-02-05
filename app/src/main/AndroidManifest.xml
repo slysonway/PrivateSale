@@ -15,7 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view.ui.activity.AboutActivity"></activity>
+        <service
+            android:name=".data.service.CustomerService"
+            android:enabled="true"
+            android:exported="true"></service>
+        <service
+            android:name=".data.service.EventService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".view.ui.activity.AboutActivity" />
         <activity android:name=".view.ui.activity.CustomerActivity" />
 
         <receiver android:name=".widget.EventWidget">

@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,7 +17,7 @@ import android.widget.TextView;
 
 import com.kfp.privatesale.Preferences;
 import com.kfp.privatesale.R;
-import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.data.db.entity.Event;
 import com.kfp.privatesale.viewmodel.EventViewModel;
 
 import java.text.SimpleDateFormat;
@@ -63,8 +62,11 @@ public class AboutActivity extends AppCompatActivity {
                 for (Event event : events) {
                     adapter.add(event);
                 }
-                Log.d(TAG, preferences.getEvent().toString());
                 Event event = preferences.getEvent();
+                if (event == null) {
+                    spinner.setSelection(0);
+                    return;
+                }
                 for (int i = 0; i < adapter.getCount(); i++) {
                     if (adapter.getItem(i).getId().equals(event.getId())) {
                         spinner.setSelection(i);

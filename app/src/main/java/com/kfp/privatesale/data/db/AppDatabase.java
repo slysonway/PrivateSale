@@ -1,4 +1,4 @@
-package com.kfp.privatesale.service;
+package com.kfp.privatesale.data.db;
 
 import android.content.Context;
 
@@ -7,12 +7,13 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 
-import com.kfp.privatesale.service.dao.CustomerDAO;
-import com.kfp.privatesale.service.dao.CustomerEventJoinDAO;
-import com.kfp.privatesale.service.dao.EventDAO;
-import com.kfp.privatesale.service.model.Customer;
-import com.kfp.privatesale.service.model.CustomerEventJoin;
-import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.data.db.dao.CustomerDAO;
+import com.kfp.privatesale.data.db.dao.CustomerEventJoinDAO;
+import com.kfp.privatesale.data.db.dao.EventDAO;
+import com.kfp.privatesale.data.db.entity.Customer;
+import com.kfp.privatesale.data.db.entity.CustomerEventJoin;
+import com.kfp.privatesale.data.db.entity.Event;
+
 
 @Database(entities = {Event.class, Customer.class, CustomerEventJoin.class}, version = 1)
 @TypeConverters(DateConverter.class)

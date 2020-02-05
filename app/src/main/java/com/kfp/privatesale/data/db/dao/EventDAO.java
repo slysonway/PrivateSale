@@ -1,4 +1,4 @@
-package com.kfp.privatesale.service.dao;
+package com.kfp.privatesale.data.db.dao;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -7,7 +7,7 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 import androidx.room.Update;
 
-import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.data.db.entity.Event;
 
 import java.util.List;
 

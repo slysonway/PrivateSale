@@ -6,9 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.kfp.privatesale.service.model.Customer;
-import com.kfp.privatesale.service.model.CustomerEventJoin;
-import com.kfp.privatesale.service.repository.CustomerEventJoinRepository;
+import com.kfp.privatesale.data.db.entity.Customer;
+import com.kfp.privatesale.data.db.entity.CustomerEventJoin;
+import com.kfp.privatesale.data.db.repository.CustomerEventJoinRepository;
 
 import java.util.List;
 

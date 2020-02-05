@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.kfp.privatesale.ConstantField;
 import com.kfp.privatesale.R;
-import com.kfp.privatesale.service.model.Customer;
-import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.data.db.entity.Customer;
+import com.kfp.privatesale.data.db.entity.Event;
 import com.kfp.privatesale.view.ui.fragment.CustomerListFragment;
 import com.kfp.privatesale.view.ui.fragment.EventListFragment;
 

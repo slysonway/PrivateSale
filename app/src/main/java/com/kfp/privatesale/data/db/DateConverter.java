@@ -1,4 +1,4 @@
-package com.kfp.privatesale.service;
+package com.kfp.privatesale.data.db;
 
 import androidx.room.TypeConverter;
 

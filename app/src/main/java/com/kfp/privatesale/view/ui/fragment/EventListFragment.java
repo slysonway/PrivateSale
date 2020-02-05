@@ -20,27 +20,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
 
-import com.google.firebase.firestore.DocumentChange;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-import com.google.firebase.firestore.ListenerRegistration;
-import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.kfp.privatesale.R;
-import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.data.db.entity.Event;
 import com.kfp.privatesale.view.adapter.EventAdapter;
 import com.kfp.privatesale.viewmodel.EventViewModel;
 
 import java.util.List;
 
 
-public class EventListFragment extends Fragment implements EventListener<QuerySnapshot> {
+public class EventListFragment extends Fragment {
 
     private OnListFragmentInteractionListerner mListener;
     private EventAdapter adapter;
-    private Query query;
-    private ListenerRegistration registration;
     private EventViewModel eventViewModel;
 
     public EventListFragment() {
@@ -61,8 +52,6 @@ public class EventListFragment extends Fragment implements EventListener<QuerySn
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            query = db.collection("events");
             adapter = new EventAdapter(mListener);
             DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
             recyclerView.addItemDecoration(dividerItemDecoration);
@@ -103,13 +92,11 @@ public class EventListFragment extends Fragment implements EventListener<QuerySn
     @Override
     public void onStart() {
         super.onStart();
-        startQuery();
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        stopQuery();
     }
 
     @Override
@@ -126,49 +113,6 @@ public class EventListFragment extends Fragment implements EventListener<QuerySn
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    @Override
-    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-        if (e != null) {
-            return; //TODO handle better exception
-        }
-
-        for (DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()) {
-            switch (dc.getType()) {
-                case ADDED:
-                    eventViewModel.insert(dc.getDocument().toObject(Event.class));
-                    break;
-                case REMOVED:
-//                    mValues.remove(dc.getOldIndex());
-//                    mValuesFiltered.remove(dc.getOldIndex());
-//                    notifyItemRemoved(dc.getOldIndex());
-                    break;
-                case MODIFIED:
-                    if (dc.getOldIndex() == dc.getNewIndex()) {
-                        eventViewModel.update(dc.getDocument().toObject(Event.class));
-                    } else {
-                        eventViewModel.update(dc.getDocument().toObject(Event.class));
-                    }
-                    break;
-            }
-        }
-    }
-
-    public void startQuery() {
-        if (query != null && registration == null) {
-            registration = query.addSnapshotListener(this);
-        }
-    }
-
-    public void stopQuery() {
-        if (registration != null) {
-            registration.remove();
-            registration = null;
-        }
-//        mValues.clear();
-//        mValuesFiltered.clear();
-//        notifyDataSetChanged();
     }
 
     public interface  OnListFragmentInteractionListerner{

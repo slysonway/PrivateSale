@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
 
-import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.data.db.entity.Event;
 
 
 public class Preferences {

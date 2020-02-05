@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.kfp.privatesale.ConstantField;
 import com.kfp.privatesale.R;
-import com.kfp.privatesale.service.model.Customer;
+import com.kfp.privatesale.data.db.entity.Customer;
 import com.kfp.privatesale.viewmodel.CustomerViewModel;
 
 public class CustomerActivity extends AppCompatActivity {

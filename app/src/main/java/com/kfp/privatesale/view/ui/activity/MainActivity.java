@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -18,17 +19,24 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.zxing.Result;
 import com.kfp.privatesale.ConstantField;
 import com.kfp.privatesale.R;
+import com.kfp.privatesale.data.service.CustomerService;
+import com.kfp.privatesale.data.service.EventService;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
 public class MainActivity extends AppCompatActivity implements ZXingScannerView.ResultHandler {
     private BottomNavigationView bottomNavigationView;
     private ZXingScannerView mScannerView;
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Log.d(TAG, "Start Event Service");
+        startService(new Intent(this, EventService.class));
+        Log.d(TAG, "Start Customer Service");
+        startService(new Intent(this, CustomerService.class));
 
         bottomNavigationView = findViewById(R.id.bottom_menu);
 
@@ -77,6 +85,15 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     protected void onPause() {
         super.onPause();
         mScannerView.stopCamera();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "Stop Event Service");
+        stopService(new Intent(this, EventService.class));
+        Log.d(TAG, "Stop Customer Service");
+        stopService(new Intent(this, CustomerService.class));
     }
 
     @Override

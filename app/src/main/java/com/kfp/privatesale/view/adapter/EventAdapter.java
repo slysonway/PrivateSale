@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.kfp.privatesale.R;
-import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.data.db.entity.Event;
 import com.kfp.privatesale.view.ui.fragment.EventListFragment;
 
 import java.util.ArrayList;

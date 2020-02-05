@@ -1,4 +1,4 @@
-package com.kfp.privatesale.service.model;
+package com.kfp.privatesale.data.db.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
@@ -15,7 +15,6 @@ public class Customer {
     private String firstname;
     private String lastname;
     private String mail;
-
     @NonNull
     public String getId() {
         return id;

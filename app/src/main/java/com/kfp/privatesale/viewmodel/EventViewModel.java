@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.kfp.privatesale.service.model.Event;
-import com.kfp.privatesale.service.repository.EventRepository;
+import com.kfp.privatesale.data.db.entity.Event;
+import com.kfp.privatesale.data.db.repository.EventRepository;
 
 import java.util.List;
 

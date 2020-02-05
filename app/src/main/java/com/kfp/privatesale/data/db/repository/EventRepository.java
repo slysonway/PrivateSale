@@ -1,13 +1,13 @@
-package com.kfp.privatesale.service.repository;
+package com.kfp.privatesale.data.db.repository;
 
 import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.lifecycle.LiveData;
 
-import com.kfp.privatesale.service.AppDatabase;
-import com.kfp.privatesale.service.dao.EventDAO;
-import com.kfp.privatesale.service.model.Event;
+import com.kfp.privatesale.data.db.AppDatabase;
+import com.kfp.privatesale.data.db.dao.EventDAO;
+import com.kfp.privatesale.data.db.entity.Event;
 
 import java.util.List;
 

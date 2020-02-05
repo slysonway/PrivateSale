@@ -6,8 +6,8 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
-import com.kfp.privatesale.service.model.Customer;
-import com.kfp.privatesale.service.repository.CustomerRepository;
+import com.kfp.privatesale.data.db.entity.Customer;
+import com.kfp.privatesale.data.db.repository.CustomerRepository;
 
 import java.util.List;
 

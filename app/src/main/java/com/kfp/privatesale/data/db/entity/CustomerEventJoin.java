@@ -1,4 +1,4 @@
-package com.kfp.privatesale.service.model;
+package com.kfp.privatesale.data.db.entity;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
