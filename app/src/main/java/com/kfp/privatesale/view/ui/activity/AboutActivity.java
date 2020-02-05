@@ -15,7 +15,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.kfp.privatesale.Preferences;
+import com.kfp.privatesale.utils.Preferences;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.data.db.entity.Event;
 import com.kfp.privatesale.viewmodel.EventViewModel;
@@ -64,7 +64,7 @@ public class AboutActivity extends AppCompatActivity {
                 }
                 Event event = preferences.getEvent();
                 if (event == null) {
-                    spinner.setSelection(0);
+                    spinner.setSelection(-1);
                     return;
                 }
                 for (int i = 0; i < adapter.getCount(); i++) {

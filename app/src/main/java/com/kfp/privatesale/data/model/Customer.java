@@ -1,8 +1,11 @@
 package com.kfp.privatesale.data.model;
 
+import com.google.firebase.firestore.DocumentId;
+
 import java.util.List;
 
 public class Customer {
+    @DocumentId
     private String id;
     private String firstname;
     private String lastname;

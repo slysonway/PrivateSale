@@ -16,11 +16,13 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.zxing.Result;
-import com.kfp.privatesale.ConstantField;
+import com.kfp.privatesale.utils.ConstantField;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.data.service.CustomerService;
 import com.kfp.privatesale.data.service.EventService;
+import com.kfp.privatesale.utils.CustomerProcess;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 
@@ -28,6 +30,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private BottomNavigationView bottomNavigationView;
     private ZXingScannerView mScannerView;
     private static final String TAG = MainActivity.class.getSimpleName();
+    private FirebaseAnalytics firebaseAnalytics;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         startService(new Intent(this, EventService.class));
         Log.d(TAG, "Start Customer Service");
         startService(new Intent(this, CustomerService.class));
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         bottomNavigationView = findViewById(R.id.bottom_menu);
 
@@ -101,6 +105,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         //Toast.makeText(this, "Contents = " + rawResult.getText() + ", Format = " + rawResult.getBarcodeFormat().toString(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(MainActivity.this, CustomerActivity.class);
         intent.putExtra(ConstantField.SCANNED_CODE, rawResult.getText());
+        intent.putExtra(ConstantField.CUSTOMER_PROCESS, CustomerProcess.CHECKING);
         startActivity(intent);
 
         Handler handler = new Handler();

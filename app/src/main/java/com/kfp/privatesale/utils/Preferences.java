@@ -1,9 +1,10 @@
-package com.kfp.privatesale;
+package com.kfp.privatesale.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import androidx.preference.PreferenceManager;
 
+import com.kfp.privatesale.R;
 import com.kfp.privatesale.data.db.entity.Event;
 
 

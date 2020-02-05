@@ -3,6 +3,7 @@ package com.kfp.privatesale.data.service;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -71,26 +72,37 @@ public class CustomerService extends Service implements EventListener<QuerySnaps
         if (e != null) {
             return; //TODO handle better exception
         }
+        Customer customer;
 
         for (DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()) {
             switch (dc.getType()) {
                 case ADDED:
                     com.kfp.privatesale.data.db.entity.Customer customerEntity = dc.getDocument().toObject(com.kfp.privatesale.data.db.entity.Customer.class);
                     customerRepository.insert(customerEntity);
-                    Customer customer = dc.getDocument().toObject(Customer.class);
+                    customer = dc.getDocument().toObject(Customer.class);
                     for (String event : customer.getEvents()) {
-                        customerEventJoinRepository.insert(new CustomerEventJoin(customerEntity.getId(), event));
+                        customerEventJoinRepository.insert(new CustomerEventJoin(customer.getId(), event));
                     }
                     break;
                 case REMOVED:
+                    Log.d("CustomerService REMOVED", "remove");
 //                    mValues.remove(dc.getOldIndex());
 //                    notifyItemRemoved(dc.getOldIndex());
                     break;
                 case MODIFIED:
+                    //TODO when event are delete from customer
                     if (dc.getOldIndex() == dc.getNewIndex()) {
                         customerRepository.update(dc.getDocument().toObject(com.kfp.privatesale.data.db.entity.Customer.class));
+                        customer = dc.getDocument().toObject(Customer.class);
+                        for (String event : customer.getEvents()) {
+                            customerEventJoinRepository.insert(new CustomerEventJoin(customer.getId(), event));
+                        }
                     } else {
                         customerRepository.update(dc.getDocument().toObject(com.kfp.privatesale.data.db.entity.Customer.class));
+                        customer = dc.getDocument().toObject(Customer.class);
+                        for (String event : customer.getEvents()) {
+                            customerEventJoinRepository.insert(new CustomerEventJoin(customer.getId(), event));
+                        }
                     }
                     break;
             }

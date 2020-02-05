@@ -32,6 +32,10 @@
     <string name="card_email">Email</string>
     <string name="card_event">Event</string>
 
+    //dialog
+    <string name="error_dialog_title">Erreur</string>
+    <string name="no_event_select_dialog">Aucun évênement est sélectionné.\n Aller dans à propos pour le sélectionner.</string>
+
 
 
     <string name="filer">...</string>

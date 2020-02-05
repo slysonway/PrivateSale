@@ -11,10 +11,11 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.kfp.privatesale.ConstantField;
+import com.kfp.privatesale.utils.ConstantField;
 import com.kfp.privatesale.R;
 import com.kfp.privatesale.data.db.entity.Customer;
 import com.kfp.privatesale.data.db.entity.Event;
+import com.kfp.privatesale.utils.CustomerProcess;
 import com.kfp.privatesale.view.ui.fragment.CustomerListFragment;
 import com.kfp.privatesale.view.ui.fragment.EventListFragment;
 
@@ -40,6 +41,7 @@ public class ListActivity extends AppCompatActivity implements EventListFragment
         Toast.makeText(this, customer.toString(), Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(ListActivity.this, CustomerActivity.class);
         intent.putExtra(ConstantField.SCANNED_CODE, customer.getId());
+        intent.putExtra(ConstantField.CUSTOMER_PROCESS, CustomerProcess.CONSULTATION);
         startActivity(intent);
     }
 

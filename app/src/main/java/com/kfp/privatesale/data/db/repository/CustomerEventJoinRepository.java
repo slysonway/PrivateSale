@@ -9,6 +9,7 @@ import com.kfp.privatesale.data.db.AppDatabase;
 import com.kfp.privatesale.data.db.dao.CustomerEventJoinDAO;
 import com.kfp.privatesale.data.db.entity.Customer;
 import com.kfp.privatesale.data.db.entity.CustomerEventJoin;
+import com.kfp.privatesale.data.db.entity.Event;
 
 import java.util.List;
 
@@ -21,8 +22,13 @@ public class CustomerEventJoinRepository {
     }
 
     public LiveData<List<Customer>> getCustomerByEventId(String idEvent) {
-        return customerEventJoinDAO.getUserByEvent(idEvent);
+        return customerEventJoinDAO.getCustomerByEvent(idEvent);
     }
+
+    public LiveData<List<Event>> getEventByCustomerId(String idCustomer) {
+        return customerEventJoinDAO.getEventByCustomer(idCustomer);
+    }
+
 
     public void insert(CustomerEventJoin customerEventJoin) {
         new InsertAsyncTask(customerEventJoinDAO).execute(customerEventJoin);
@@ -43,4 +49,6 @@ public class CustomerEventJoinRepository {
             return null;
         }
     }
+
+    //public static class DeleteAsyncTask extends AsyncTask
 }
