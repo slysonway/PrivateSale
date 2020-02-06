@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
     private ZXingScannerView mScannerView;
     private static final String TAG = MainActivity.class.getSimpleName();
     private FirebaseAnalytics firebaseAnalytics;
+    private boolean isTorchOn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
         ViewGroup contentFrame = (ViewGroup) findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(this);
         contentFrame.addView(mScannerView);
+        isTorchOn = mScannerView.getFlash();
 
         configureBottomMenu();
     }
@@ -70,7 +72,15 @@ public class MainActivity extends AppCompatActivity implements ZXingScannerView.
                         startActivity(new Intent(MainActivity.this, ListActivity.class));
                         break;
                     case R.id.action_flash:
-                        Toast.makeText(MainActivity.this, "flash", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(MainActivity.this, "flash", Toast.LENGTH_SHORT).show();
+                        if (isTorchOn) {
+                            mScannerView.setFlash(false);
+                            isTorchOn = false;
+                        } else {
+                            mScannerView.setFlash(true);
+                            isTorchOn = true;
+                        }
+
                         break;
                 }
                 return true;
