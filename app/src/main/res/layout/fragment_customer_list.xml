@@ -7,6 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"
+    android:background="@color/colorPrimaryLight"
     tools:context=".view.ui.fragment.CustomerListFragment"
-    tools:listitem="@layout/fragment_customer_title" />
+    tools:listitem="@layout/fragment_customer_card" />
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,15 +45,26 @@ public class CustomerListFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_customer_list, container, false);
 
+        //WORK
+//        if (view instanceof RecyclerView) {
+//            Context context = view.getContext();
+//            RecyclerView recyclerView = (RecyclerView) view;
+//            recyclerView.setLayoutManager(new LinearLayoutManager(context));
+//            adapter = new CustomerAdapter(mListener);
+//            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
+//            recyclerView.addItemDecoration(dividerItemDecoration);
+//            recyclerView.setAdapter(adapter);
+//        }
+        //TEST
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
-            recyclerView.setLayoutManager(new LinearLayoutManager(context));
             adapter = new CustomerAdapter(mListener);
-            DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(context, DividerItemDecoration.VERTICAL);
-            recyclerView.addItemDecoration(dividerItemDecoration);
+            GridLayoutManager manager = new GridLayoutManager(context, 2);
+            recyclerView.setLayoutManager(manager);
             recyclerView.setAdapter(adapter);
         }
+
         CustomerEventJoinViewModel customerEventJoinViewModel = ViewModelProviders.of(this).get(CustomerEventJoinViewModel.class);
         customerEventJoinViewModel.customerByEvent(eventId).observe(this, new Observer<List<Customer>>() {
             @Override

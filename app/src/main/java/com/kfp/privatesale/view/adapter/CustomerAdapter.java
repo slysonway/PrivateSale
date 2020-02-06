@@ -35,7 +35,7 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_customer_title, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_customer_card, parent, false);
         return  new ViewHolder(view);
     }
 
@@ -44,9 +44,8 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mCustomer = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).getId());
         holder.mFirstName.setText(mValues.get(position).getFirstname());
-        holder.mLastName.setText(mValues.get(position).getLastname());
+        holder.mLastName.setText(mValues.get(position).getLastname().toUpperCase());
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,7 +64,6 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView mIdView;
         public final TextView mFirstName;
         public final TextView mLastName;
         public Customer mCustomer;
@@ -73,9 +71,9 @@ public class CustomerAdapter extends RecyclerView.Adapter<CustomerAdapter.ViewHo
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mIdView = (TextView) view.findViewById(R.id.customer_id);
-            mFirstName = (TextView) view.findViewById(R.id.customer_firstname);
             mLastName = (TextView) view.findViewById(R.id.customer_lastname);
+            mFirstName = (TextView) view.findViewById(R.id.customer_firstname);
         }
+
     }
 }
