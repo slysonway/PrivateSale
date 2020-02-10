@@ -21,6 +21,7 @@ import com.kfp.privatesale.R;
 import com.kfp.privatesale.data.db.entity.Customer;
 import com.kfp.privatesale.utils.CustomerProcess;
 import com.kfp.privatesale.utils.Preferences;
+import com.kfp.privatesale.utils.Reporting;
 import com.kfp.privatesale.viewmodel.CustomerEventJoinViewModel;
 import com.kfp.privatesale.viewmodel.CustomerViewModel;
 
@@ -94,7 +95,6 @@ public class CustomerActivity extends AppCompatActivity {
         this.customer = customer;
         switch (customerProcess) {
             case CONSULTATION:
-                //TODO get all events in spinners
                 name.setText(this.customer.getLastname());
                 firstname.setText(this.customer.getFirstname());
                 email.setText(this.customer.getMail());
@@ -110,6 +110,7 @@ public class CustomerActivity extends AppCompatActivity {
                 }
                 //if customer not exist then unauthorised
                 if (customer == null) {
+                    Reporting.getInstance(this).sendCustomerState("", false, preferences.getEvent().getId());
                     status.setVisibility(View.VISIBLE);
                     status.setBackgroundColor(getResources().getColor(android.R.color.holo_red_dark));
                     status.setText(R.string.unauthorized);
@@ -134,6 +135,7 @@ public class CustomerActivity extends AppCompatActivity {
     }
     // customer can't participate
     private void setNotCheckedView() {
+        Reporting.getInstance(this).sendCustomerState(this.customerId, false, preferences.getEvent().getId());
         name.setText(this.customer.getLastname());
         firstname.setText(this.customer.getFirstname());
         email.setText(this.customer.getMail());
@@ -145,6 +147,7 @@ public class CustomerActivity extends AppCompatActivity {
 
     //customer can participate to event
     private void setCheckedView() {
+        Reporting.getInstance(this).sendCustomerState(this.customerId, true, preferences.getEvent().getId());
         name.setText(this.customer.getLastname());
         firstname.setText(this.customer.getFirstname());
         email.setText(this.customer.getMail());

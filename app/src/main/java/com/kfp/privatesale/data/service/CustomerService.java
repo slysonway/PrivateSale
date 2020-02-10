@@ -63,14 +63,13 @@ public class CustomerService extends Service implements EventListener<QuerySnaps
 
     @Override
     public IBinder onBind(Intent intent) {
-        // TODO: Return the communication channel to the service.
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     @Override
     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
         if (e != null) {
-            return; //TODO handle better exception
+            return;
         }
         Customer customer;
 

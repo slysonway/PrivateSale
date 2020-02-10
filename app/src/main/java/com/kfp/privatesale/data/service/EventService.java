@@ -66,7 +66,7 @@ public class EventService extends Service implements EventListener<QuerySnapshot
     @Override
     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
         if (e != null) {
-            return; //TODO handle better exception
+            return;
         }
 
         for (DocumentChange dc : queryDocumentSnapshots.getDocumentChanges()) {
